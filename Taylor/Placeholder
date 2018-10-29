@@ -7,5 +7,16 @@ void deposit(){
     balance=balance+amt;
 }
 
+void withdraw(){
+    double amt;
+    System.out.println("Enter the amount you would like to withdraw.");
+    amt.userinput.?;
+    if(balance>=amt){
+        balance=balance-amt;
+    }
+    else{
+        System.out.println("You do not have sufficient funds.");
+    }
+}
 
   

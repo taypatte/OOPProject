@@ -1,7 +1,9 @@
+Scanner userinput=new Scanner(System.in);
+
 void deposit(){
     double amt;
     System.out.println("Enter the amount you want to deposit.");
-    amt= /*assign when we have scanner function in*/
+    amt=userinput.?;
     balance=balance+amt;
 }
 

@@ -1,0 +1,8 @@
+Class Bank{
+  private ArrayList<Account> Accounts;
+  String adminPassword = 12345;
+  
+  boolean foundAccount();
+  private openAccount();
+  private adminMenu();
+  

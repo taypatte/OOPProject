@@ -1,1 +1,179 @@
 //Glen's branch
+import java.util.Scanner;
+class Bank{
+	int checking=0;
+	int saving=10000;
+	Account create(int pin,int ssn,String type) {
+		if(type=="checking") {
+			Account yoyo=new Account(++checking,pin,ssn);
+			return yoyo;
+		}
+		else {
+			Account save=new Account(++saving,pin,ssn);
+			return save;
+		}
+	}
+	Account create(int pin,int ssn,String type,double Balance) {
+		if(type=="checking") {
+			Account yoyo=new Account(++checking,pin,ssn,Balance);
+			return yoyo;
+		}
+		else {
+			Account save=new Account(++saving,pin,ssn,Balance);
+			return save;
+		}
+	}
+}
+class Account{
+	int accountNum;
+	int pinNum;
+	int ssn;
+	double balance=0;
+	double lastDep=0;
+	Account(){	
+	}
+	Account(int AccountNum,int PinNum,int SSN){
+		accountNum=AccountNum;
+		pinNum=PinNum;
+		ssn=SSN;
+	}
+	Account(int AccountNum,int PinNum,int SSN,double Balance){
+		accountNum=AccountNum;
+		pinNum=PinNum;
+		ssn=SSN;
+		balance=Balance;
+	}
+	boolean ValidatePIN() {
+		System.out.println("Pleace type in PIN");
+		Scanner scan= new Scanner(System.in);
+		int number=scan.nextInt();
+		if(number==pinNum) 
+			return true;
+		else
+			return false;
+	}
+	void DepositFunds() {
+		System.out.print("Please type in the amount of money\n");
+		Scanner scan= new Scanner(System.in);
+		double number=scan.nextDouble();
+		balance+=number;
+		lastDep=number;
+		System.out.print("Deposit $"+number+" dollars\n");
+		System.out.print("The balance becomes $"+balance+" dollars\n");
+	}
+	void WithdrawFunds() {
+		System.out.print("Please type in the amount of money\n");
+		Scanner scan= new Scanner(System.in);
+		double number=scan.nextDouble();
+		if(number>balance) {//insufficient funds
+			System.out.print("Sorry you don't have that much money\n");
+		}
+		else {
+			balance-=number;
+			System.out.print("Withdraw $"+number+" dollars\n");
+			System.out.print("The balance becomes $"+balance+" dollars\n");
+		}
+	}
+	void QueryBalance() {
+		System.out.print("The balance is $"+balance+" dollars\n");
+	}
+	void Transfer(Account target) {
+		System.out.print("Please type in the amount of money\n");
+		Scanner scan= new Scanner(System.in);
+		double number=scan.nextDouble();
+		if(number>balance) {//insufficient funds
+			System.out.print("Sorry you don't have that much money\n");
+		}
+		else {
+			balance-=number;
+			target.balance+=number;
+			System.out.print("Transfer $"+number+" dollars\n");
+			System.out.print("The balance becomes $"+balance+" dollars\n");
+		}
+	}
+	void VLDA() {
+		System.out.print("The last deposit ammount is $"+lastDep+" dollars\n");
+	}
+}
+public class Project {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Account[] account=new Account[10];
+		for(int i=0;i<10;i++)
+			account[i]=new Account();
+		Bank bank=new Bank();
+		account[0]=bank.create(5678,123456789, "checking",300);
+		account[1]=bank.create(4567,234567890,"checking",4000);
+		account[2]=bank.create(3456,345678901,"checking",70);
+		account[3]=bank.create(2345,456789012,"checking", 5000);
+		System.out.println("Welcome! 1.Customer 2.Bank");
+		Scanner scan= new Scanner(System.in);
+		int number=scan.nextInt();
+		if(number==1) {//Customer
+			System.out.print("Pleace enter account number\n");
+			number=scan.nextInt();
+			boolean validaccount=false;
+			for(int i=0;i<10;i++) {
+				if(account[i].accountNum==number) {//verify account number
+					int invalidPIN=3;
+					validaccount=true;
+					while(invalidPIN>0) {//3 chance to type wrong PIN
+						if(account[i].ValidatePIN()) {
+							boolean cancel=false;
+							while(!cancel) {
+								System.out.print("\nChoose your transaction type:\n");
+								System.out.print("1.Deposit  2.Withdrawal               3.Query Balance\n");
+								System.out.print("4.Transfer 5.View Last Deposit Amount 6.Cancel\n");
+								number=scan.nextInt();
+								if(number==1) {//Deposit
+									account[i].DepositFunds();
+								}
+								if(number==2) {//Withdrawal
+									account[i].WithdrawFunds();
+								}
+								if(number==3) {//Query Balance
+									account[i].QueryBalance();
+								}
+								if(number==4) {//Transfer
+									System.out.print("Pleace type in the target account number\n");
+									number=scan.nextInt();
+									boolean validtarget=false;
+									for(int j=0;j<10;j++) {
+										if(account[j].accountNum==number) {
+											account[i].Transfer(account[j]);
+											validtarget=true;
+										}
+									}
+									if(!validtarget) {
+										System.out.println("No such account number");
+									}
+								}
+								if(number==5) {//View Last Deposit Amount
+									account[i].VLDA();
+								}
+								if(number==6) {//Cancel
+									System.out.print("Thanks!!");
+									cancel=true;
+								}
+							}
+							break;
+						}
+						else {
+							System.out.print(account[i].pinNum);
+							System.out.print("\nWrong PIN, you have "+(--invalidPIN)+" times to try\n");
+						}
+					}
+				}
+			}
+			if(!validaccount) {
+				System.out.println("No such account number");
+			}
+		}
+		else{//Bank
+			
+		}
+		//System.out.println(account[2].balance);
+	}
+
+}

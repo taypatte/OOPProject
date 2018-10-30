@@ -160,7 +160,7 @@ public class Project {
 							break;
 						}
 						else {
-							System.out.print(account[i].pinNum);
+							System.out.print("Correct PIN is "+account[i].pinNum+"\n");
 							System.out.print("\nWrong PIN, you have "+(--invalidPIN)+" times to try\n");
 						}
 					}
@@ -177,3 +177,4 @@ public class Project {
 	}
 
 }
+

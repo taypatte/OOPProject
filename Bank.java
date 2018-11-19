@@ -17,6 +17,9 @@ public class Bank {
         this.partialCheckingAccountNumber = 1;
         this.partialSavingsAccountNumber = 1;
     }
+    public void addAccount(Account account) {
+        this.accounts.add(account);
+    }
     private String getValidPIN() {
         boolean correctLength = false;
         String pin = "";
@@ -179,6 +182,10 @@ public class Bank {
             }
         }
 
+    }
+
+    public ArrayList<Account> getAccounts() {
+        return accounts;
     }
 
     public void admin(String adminPassword) {

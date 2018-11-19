@@ -1,12 +1,16 @@
 package com.eddiegonzalez;
 
+import java.util.Scanner;
+
 public class Account {
     private String accountNumber;
     private String pinNumber;
     private String ssn;
-    private long balance;
+    private double balance;
+    private double lastDeposit;
+    public static Scanner scanner = new Scanner(System.in);
 
-    public Account(String accountNumber, String pinNumber, String ssn, long balance) {
+    public Account(String accountNumber, String pinNumber, String ssn, double balance) {
         this.accountNumber = accountNumber;
         this.pinNumber = pinNumber;
         this.ssn = ssn;
@@ -20,7 +24,12 @@ public class Account {
     }
 
     public boolean validatePIN() {
-        return true;
+        System.out.println("Pleace type in PIN");
+        String pin = scanner.nextLine();
+        if(pin.equals(pinNumber))
+            return true;
+        else
+            return false;
     }
 
     public String getAccountNumber() {
@@ -35,7 +44,7 @@ public class Account {
         return ssn;
     }
 
-    public long getBalance() {
+    public double getBalance() {
         return balance;
     }
 
@@ -51,7 +60,7 @@ public class Account {
         this.ssn = ssn;
     }
 
-    public void setBalance(long balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
@@ -59,4 +68,48 @@ public class Account {
     public String toString() {
         return this.accountNumber + " " + this.pinNumber + " " + this.ssn + " " + this.balance;
     }
+
+//--------------------------------------------------------------------//
+
+    void depositFunds() {
+        System.out.println("Please type in the amount of money you would like to deposit.");
+        double deposit =scanner.nextDouble();
+        scanner.nextLine();
+        balance += deposit;
+        lastDeposit = deposit;
+        System.out.println("Deposit $"+deposit+" dollars");
+        System.out.println("The balance becomes $"+balance+" dollars");
+    }
+    void withdrawFunds() {
+        System.out.println("Please type in the amount of money");
+        double withdrawAmount = scanner.nextDouble();
+        if(withdrawAmount > balance) {//insufficient funds
+            System.out.println("Sorry you don't have that much money.");
+        }
+        else {
+            balance-=withdrawAmount;
+            System.out.println("Withdraw $"+withdrawAmount+" dollars");
+            System.out.println("The balance becomes $"+balance+" dollars");
+        }
+    }
+    void queryBalance() {
+        System.out.println("The balance is $"+balance+" dollars");
+    }
+    void transfer(Account target) {
+        System.out.println("Please type in the amount of money");
+        double transferAmount = scanner.nextDouble();
+        if(transferAmount > balance) {//insufficient funds
+            System.out.print("Sorry you don't have that much money\n");
+        }
+        else {
+            balance -= transferAmount;
+            target.balance += transferAmount;
+            System.out.print("Transfer $"+transferAmount+" dollars\n");
+            System.out.print("The balance becomes $"+balance+" dollars\n");
+        }
+    }
+    void VLDA() {
+        System.out.print("The last deposit ammount is $"+lastDeposit+" dollars\n");
+    }
 }
+

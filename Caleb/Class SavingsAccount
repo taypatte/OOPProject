@@ -1,0 +1,43 @@
+import java.util.Scanner;
+import java.util.Timer; 
+import java.util.Timer.schedule;
+
+
+class SavingsAccount extends Account{
+	
+	private double balance;
+	private double interest;
+	private long period;
+	private long delay;
+
+	public SavingsAccount()
+	{
+		balance = 0;
+		interest = 0.05;
+		period = 60000;
+		delay = 60000;
+	}
+
+	public SavingsAccount(double initialBalance)
+	{
+		balance = initialBalance;
+		if (balance > 0){
+			//timer should execute every minute, one minute after original call
+			timer.schedule(addInterest(balance), delay, period);
+		}
+	}
+
+	private double addInterest(balance)
+	{
+		//compounded interest
+		balance = balance + balance * interest;
+		return balance;
+	}
+
+	
+	
+	private void schedule(addInterest(balance), delay, period)
+	{
+		addInterest(balance);
+	}
+}

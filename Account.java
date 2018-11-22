@@ -25,7 +25,8 @@ public class Account {
 
     public boolean validatePIN() {
         System.out.println("Pleace type in PIN");
-        String pin = scanner.nextLine();
+        Scanner scan=new Scanner(System.in);
+        String pin = scan.nextLine();
         if(pin.equals(pinNumber))
             return true;
         else

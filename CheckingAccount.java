@@ -1,4 +1,4 @@
-package com.eddiegonzalez;
+
 
 public class CheckingAccount extends Account {
 

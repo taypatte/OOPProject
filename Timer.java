@@ -21,6 +21,18 @@ public class ThisTimer extends TimerTask extends SavingsAccount{
         }
     }
     
+    public void addInterest() {
+
+        // Get the monthly interest rate.
+        double monthlyInterestRate = annualInterestRate / 12;
+
+        // Calculate the last amount of interest earned.
+        lastAmountOfInterestEarned = monthlyInterestRate * accountBalance;
+
+        // Add the interest to the balance.
+        accountBalance += lastAmountOfInterestEarned;
+    }
+    
     public static void main(String args[]){
         //timer starts
         

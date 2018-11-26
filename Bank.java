@@ -1,4 +1,3 @@
-package com.eddiegonzalez;
 
 import java.util.ArrayList;
 import java.util.Scanner;

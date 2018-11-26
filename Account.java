@@ -1,5 +1,3 @@
-package com.eddiegonzalez;
-
 import java.util.Scanner;
 
 public class Account {

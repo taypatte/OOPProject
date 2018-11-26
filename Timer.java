@@ -3,7 +3,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class savingsAccount extends TimerTask extends Account{
+public class ThisTimer extends TimerTask extends SavingsAccount{
 
     @Override
     public void run() {
@@ -22,7 +22,9 @@ public class savingsAccount extends TimerTask extends Account{
     }
     
     public static void main(String args[]){
-        TimerTask timerTask = new MyTimerTask();
+        //timer starts
+        
+        TimerTask timerTask = new ThisTimer();
         //running timer task as daemon thread
         Timer timer = new Timer(true);
         timer.scheduleAtFixedRate(timerTask, 0, 10*1000);

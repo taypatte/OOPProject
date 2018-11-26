@@ -1,4 +1,3 @@
-package com.eddiegonzalez;
 
 public class SavingsAccount extends Account {
 

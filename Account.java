@@ -4,21 +4,24 @@ public class Account {
     private String accountNumber;
     private String pinNumber;
     private String ssn;
+    private String type;
     private double balance;
     private double lastDeposit;
     public static Scanner scanner = new Scanner(System.in);
 
-    public Account(String accountNumber, String pinNumber, String ssn, double balance) {
+    public Account(String accountNumber, String pinNumber, String ssn, double balance, String type) {
         this.accountNumber = accountNumber;
         this.pinNumber = pinNumber;
         this.ssn = ssn;
         this.balance = balance;
+        this.type = type;
     }
 
-    public Account(String accountNumber, String pinNumber, String ssn) {
+    public Account(String accountNumber, String pinNumber, String ssn, String type) {
         this.accountNumber = accountNumber;
         this.pinNumber = pinNumber;
         this.ssn = ssn;
+        this.type=type;
     }
 
     public boolean validatePIN() {
@@ -46,7 +49,9 @@ public class Account {
     public double getBalance() {
         return balance;
     }
-
+    public String getType() {
+    	return type;
+    }
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
@@ -110,5 +115,7 @@ public class Account {
     void VLDA() {
         System.out.print("The last deposit ammount is $"+lastDeposit+" dollars\n");
     }
+    void ADDInterest() {
+    	this.balance*=1.05;
+    }
 }
-
